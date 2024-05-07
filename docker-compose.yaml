@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  database:
+    image: postgres
+    container_name: db
+    ports:
+      - 5432:5432
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./PostgreSQL/data:/var/lib/postgresql/data
+
+  cache:
+    image: redis
+    container_name: cache
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    env_file:
+      - ./backend/.env
+    ports:
+      - 80:80
