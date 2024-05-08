@@ -23,11 +23,14 @@ class Movie(MovieInList):
 class MovieInHistory(MovieInList):
     datetime_: datetime
     
-class MovieInRecs(Movie):
+class MovieInRecs(MovieInList):
+    rec_id: int
+    
+class SubMovieRec(Movie):
     rec_id: int
     
 class MovieRec(BaseModel):
-    movie: MovieInRecs
+    movie: SubMovieRec
     sub_recs: list[Movie]
 
 router = APIRouter(
