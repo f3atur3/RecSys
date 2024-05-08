@@ -14,13 +14,15 @@ services:
   cache:
     image: redis
     container_name: cache
-
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    container_name: backend
-    env_file:
-      - ./backend/.env
     ports:
-      - 80:80
+      - 6379:6379
+
+  # backend:
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+  #   container_name: backend
+  #   env_file:
+  #     - ./backend/.env
+  #   ports:
+  #     - 80:80

@@ -1,5 +1,6 @@
-from config import settings
+from app.config import settings
 import psycopg2
+from psycopg2.extras import NamedTupleCursor
 
 
 def get_db_connection():
@@ -8,6 +9,7 @@ def get_db_connection():
         user=settings.DB_USER,
         password=settings.DB_PASS,
         host=settings.DB_HOST,
-        port=settings.DB_PORT
+        port=settings.DB_PORT,
+        cursor_factory=NamedTupleCursor
     )
     return conn

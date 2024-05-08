@@ -1,6 +1,10 @@
 # Dirs
 env
 __pycache__
+PostgreSQL/
+PostgreSQL
+train
 
 # Files
 *.pyc
+*.parquet

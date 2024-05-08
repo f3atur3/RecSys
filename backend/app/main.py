@@ -1,19 +1,20 @@
-from typing import List
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from fastapi_pagination import add_pagination
+
+from app.api.routers import all_routers
+from app.tasks.scheduler import gen_recs  # noqa: F401
 
 app = FastAPI()
 
-class MyModel(BaseModel):
-    id: int
-    name: str
+for router in all_routers:
+    app.include_router(router)
 
-@app.get("/data", response_model=List[MyModel])
-async def get_data():
-    # Получение данных от psycopg2
-    data = [{"id": 1, "name": "John"}, {"id": 2, "name": "Bob"}, {"id": 3, "name": "Alice"}]
-    return data
+# @app.get("/get_recs")
+# def get_recs():
+#     gen_recs.delay()
+
+add_pagination(app)
 
 origins = [
     "http://frontend:3000",

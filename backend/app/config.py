@@ -12,6 +12,12 @@ class Settings(BaseSettings):
     POSTGRES_USER: str
     POSTGRES_DB: str
     
+    REDIS_HOST: str
+    REDIS_PORT: int
+    
+    SECRET_KEY: str
+    ALGORITHM: str
+    
     model_config = SettingsConfigDict(env_file=".env")
 
 settings = Settings()
